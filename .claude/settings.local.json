@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__pdf-mcp__pdf_info",
+      "mcp__pdf-mcp__pdf_read_all",
+      "mcp__pdf-mcp__pdf_read_pages",
+      "mcp__pdf-mcp__pdf_extract_images"
+    ]
+  }
+}

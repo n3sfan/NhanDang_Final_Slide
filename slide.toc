@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Running the original code}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Code repository and reproduction}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Datasets}{9}{0}{1}
+\beamer@subsectionintoc {1}{3}{Experimental setup}{12}{0}{1}
+\beamer@sectionintoc {2}{Source code implementation of core technical components}{18}{0}{2}

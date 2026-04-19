@@ -1,0 +1,91 @@
+\documentclass{beamer}
+\usetheme{Copenhagen}
+\setbeamertemplate{headline}{}
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[utf8]{vietnam}
+\AtBeginDocument{
+  \renewcommand{\figurename}{Figure}
+  \renewcommand{\tablename}{Table}
+}
+
+
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+% For formatting theorems
+\usepackage{amsthm}
+\usepackage{booktabs}
+\definecolor{positive}{HTML}{0173B2}
+\definecolor{negative}{HTML}{DE8F05}
+\definecolor{emphasis}{HTML}{029E73}
+\definecolor{neutral}{gray}{0.55}
+\newcommand{\pos}[1]{\textcolor{positive}{#1}}
+\newcommand{\con}[1]{\textcolor{negative}{#1}}
+\newcommand{\HL}[1]{\textcolor{emphasis}{#1}}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{Handbook of Biometrics: Spoof Detection Scheme}
+\subtitle{Adaptive Normalized Representation Learning for Generalizable Face Anti-Spoofing}
+\author[Thinh \& Duc]{Le Truong Thinh (23127018)\\Le Minh Duc (23127018)}
+\institute{
+    University of Science, VNU-HCM\\
+    Faculty of Information Technology\\
+    Computer Science Department\\[1em]
+    \textbf{Instructors:}\\
+    Vo Thanh Lam\\
+    Nguyen Thanh Tinh
+}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Outline
+\begin{frame}{Contents}
+    \tableofcontents
+\end{frame}
+
+% Slide 3: Introduction
+\input{section/01.tex}
+\input{section/02.tex}
+
+
+% % Slide 4: Paper Methodology
+% \input{section/02_methodology.tex}
+
+% % Slide 5: Relationship of book and paper
+% \input{section/03_relationship.tex}
+
+% % Slide 6: Technical evaluation
+% \input{section/04_evaluation.tex}
+
+% % Slide 7: Insights & Extensibility
+% \input{section/05_insights.tex}
+
+% % Slide 8: References
+% \input{section/06_references.tex}
+
+\end{document}

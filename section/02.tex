@@ -1,0 +1,110 @@
+\section{Source code implementation of core technical components}
+
+% --- Slide 1: Section Title ---
+\begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+        \usebeamerfont{title}Section 5.4: Source code implementation of core technical components [5]\par%
+    \end{beamercolorbox}
+    \vfill
+\end{frame}
+
+% --- Slide 2: Depth Map Supervision ---
+\begin{frame}{1. Problem Definition \& Depth Supervision}
+    \begin{block}{Geometric Depth Map Supervision [13]}
+        \begin{itemize}
+            \item \textbf{Rationale:} Forces the network to learn geometric structure (real faces are 3D) rather than relying on texture biases from 2D spoofs.
+            \item \textbf{Code Identification:} \texttt{src/datasets/DG\_dataset.py} (Lines 60--62: setting depth to 0 for spoof labels).
+            \item \textbf{Consequence:} Removing supervision leads to generalization failure; network "cheats" by focusing on high-frequency domain noise.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- Slide 3: High-Dimensional Input ---
+\begin{frame}{High-Dimensional Input Selection (RGB+HSV)}
+    \begin{block}{Multi-Channel Rationale [2]}
+        \begin{itemize}
+            \item \textbf{Benefit:} HSV provides illumination (Value) and saturation signals robust to hardware-specific signatures.
+            \item \textbf{Code Identification:} \texttt{src/datasets/DG\_dataset.py} (\texttt{img\_mode='rgb\_hsv'}).
+            \item \textbf{Consequence:} RGB-only models increase vulnerability to brightness fluctuations [13], yielding higher \con{ACER/HTER} during cross-dataset testing.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- Slide 4: AFNM Module Detail ---
+\begin{frame}{2. AFNM: Adaptive Feature Normalization Module}
+    \begin{block}{BN vs IN Trade-off [5]}
+        \begin{itemize}
+            \item \textbf{Rationale:} BN is discriminative but sensitive to domain gaps; IN is stable but discards FAS-relevant style info.
+            \item \textbf{Code Identification:} \texttt{AttentionNet} in \texttt{src/models/base\_block.py} (Line 54).
+            \item \textbf{Consequence:} Without AFNM, pure BN baseline HTER is \con{23.37\%} vs \pos{15.67\%} for ANRL (I\&C\&M $\to$ O task).
+        \end{itemize}
+    \end{block}
+    \vfill
+    \begin{itemize}
+        \item \textbf{Principle:} Balance factor $\alpha_c$ per-sample: $Y_c = \alpha_c X_c^{BN} + (1-\alpha_c) X_c^{IN}$.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 5: DCC Constraints ---
+\begin{frame}{3. DCC: Dual Calibrated Constraints}
+    \begin{block}{IDC and ICS Loss Implementation}
+        \begin{itemize}
+            \item \textbf{Identification:} \texttt{src/train.py} (Lines 183--212). DCC uses exponential moving average (EMA) centroids (momentum 0.9).
+            \item \textbf{Rationale:} IDC aligns domain representations; ICS increases inter-class separation.
+            \item \textbf{Consequence:} Removing DCC results in an absolute \con{HTER increase of 2--4\%} (Table 3 in paper).
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- Slide 6: Meta-Learning training Flow ---
+\begin{frame}{4. Meta-learning training Strategy}
+    \begin{block}{Simulation of Domain Shift}
+        \begin{itemize}
+            \item \textbf{Steps:} 1. Inner Loop (Soft attention weights), 2. Meta-test, 3. Meta-Optimization.
+            \item \textbf{Identification:} \texttt{src/train.py} (Lines 329--411). 
+            \item \textbf{Rationale:} Enables AttentionNet to learn $\alpha$ estimation that generalizes to novel distributions.
+            \item \textbf{Consequence:} HTER climbs from \pos{17.61\%} to \con{19.23\%} without meta-learning.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- Slide 7: Network Architecture ---
+\begin{frame}{5. Network Architecture}
+    \begin{itemize}
+        \item \textbf{FeatExtractor:} Integrates backbone with AFNM modules for domain-invariant extraction.
+        \item \textbf{FeatEmbedder:} Discriminative head mapping features to class embeddings via ICS loss.
+        \item \textbf{DepthEstimator:} Auxiliary head specialized in 3D geometric reconstruction.
+    \end{itemize}
+    \vfill
+    \begin{block}{Architecture Selection Rationale}
+        Modular framework decouples feature learning from classification and regression for stable shared learning.
+    \end{block}
+\end{frame}
+
+% --- Slide 8: Paper to Code Mapping Summary ---
+\begin{frame}{6. Summary: Paper $\leftrightarrow$ Code Mapping}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}lll@{}}
+        \toprule
+        \textbf{Technique (Paper)} & \textbf{Code Component} & \textbf{Consequence of Removal} \\ \midrule
+        Depth Supervision & \texttt{DepthEstimator} (MSE) & Overfitting to domain noise \\
+        High-Dim Input & \texttt{rgb\_hsv} 6-ch & Low robustness to hardware [2] \\
+        AFNM (BN+IN) & \texttt{AdapNorm} Logic & HTER increase \con{+7.7\%} \\
+        DCC Losses & \texttt{loss\_domain}, \texttt{loss\_discri} & Loss of domain alignment \\
+        Meta-learning & \texttt{train()} Outer Loop & Higher HTER \con{+1.62\%} \\ \bottomrule
+    \end{tabular}
+    }
+\end{frame}
+
+% --- Slide 9: Bibliography ---
+\begin{frame}{References}
+    \footnotesize
+    \begin{itemize}
+        \item [[2]] Z. Boulkenafet, J. Komulainen, and A. Hadid. face anti-spoofing based on color texture analysis. CoRR, abs/1511.06316, 2015.
+        \item [[5]] H. et al. Joint physical-digital augmentation for face anti-spoofing, 2024.
+        \item [[13]] Y. Liu, A. Jourabloo, and X. Liu. Learning deep models for face anti-spoofing: Binary or auxiliary supervision. CoRR, abs/1803.11097, 2018.
+    \end{itemize}
+\end{frame}

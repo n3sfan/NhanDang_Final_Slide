@@ -1,0 +1,301 @@
+\section{Running the original code}
+\subsection{Code repository and reproduction}
+
+% --- Slide 1: Implementation Overview ---
+\begin{frame}{Implementation Overview}
+    \begin{block}{Main Goal}
+        Reproduce the official ANRL pipeline for generalizable face anti-spoofing.
+    \end{block}
+
+    \begin{itemize}
+        \item \textbf{Repository:} Hosted on \pos{TFace} (Tencent's official face research suite).
+        \item \textbf{Core Components Included:}
+            \begin{itemize}
+                \item Adaptive Feature Normalization Module (AFNM)
+                \item Dual Calibrated Constraints (DCC)
+                \item Meta-learning optimization routine
+            \end{itemize}
+        \item \textbf{License/Access:} Open-source via GitHub.
+    \end{itemize}
+
+    \begin{alertblock}{Technical Prerequisite}
+        Requires \HL{PRNet} for generating 3D-based facial depth maps.
+    \end{alertblock}
+\end{frame}
+
+% --- Slide 2: Reproduction Roadmap (Step 1-2) ---
+\begin{frame}{Reproduction Roadmap: Setup}
+    \textbf{Initial Environment Preparation}
+    \begin{enumerate}
+        \item \textbf{Clone Repository:}
+            \begin{exampleblock}{Command}
+                \texttt{git clone https://github.com/Tencent/TFace.git}
+            \end{exampleblock}
+        \item \textbf{Install Dependencies:}
+            \begin{exampleblock}{Python Packages}
+                \texttt{PyTorch, OmegaConf, OpenCV, scipy, wandb}
+            \end{exampleblock}
+    \end{enumerate}
+    \vfill
+    \begin{itemize}
+        \item \textbf{Next:} Configuring the PRNet depth estimator.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 3: Reproduction Roadmap (Step 3-5) ---
+\begin{frame}{Reproduction Roadmap: Models \& Data}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item \textbf{PRNet Checkpoint:} Place \texttt{prnet.pth} in \texttt{checkpoints/} directory.
+        \item \textbf{Download Datasets:}
+            \begin{itemize}
+                \item CASIA-FASD, MSU-MFSD (Source)
+                \item NUAA (Unseen Target)
+            \end{itemize}
+        \item \textbf{Pre-process Depth Maps:}
+            \begin{itemize}
+                \item \pos{Live samples:} PRNet-generated geometry.
+                \item \con{Spoof samples:} Zero-depth maps (paper protocol).
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% --- Slide 4: Execution Interface ---
+\begin{frame}{Execution: Training and Testing}
+    \textbf{Core Training Pipeline}
+    \begin{itemize}
+        \item \textbf{Main Training Command:}
+            \begin{exampleblock}{}
+                \texttt{python train.py -c configs/CM2N.yaml}
+            \end{exampleblock}
+        \item \textbf{Resuming Execution:}
+            \begin{itemize}
+                \item \texttt{--resume /path/to/ckpt.tar}
+            \end{itemize}
+        \item \textbf{Independent Testing:}
+            \begin{itemize}
+                \item \texttt{--test} flag to evaluate on target domain (NUAA).
+            \end{itemize}
+    \end{itemize}
+    \vfill
+    \begin{alertblock}{Logs \& Monitoring}
+        Offline logging via \textbf{Weights \& Biases} (wandb.mode: offline).
+    \end{alertblock}
+\end{frame}
+
+% --- Slide 5: Execution Environment ---
+\begin{frame}{Execution Environment}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \begin{block}{Hardware Specifications}
+            All experiments conducted on \textbf{Google Colab}:
+            \begin{itemize}
+                \item \textbf{GPU:} NVIDIA T4 (15 GB VRAM)
+                \item \textbf{RAM:} 12.7 GB System RAM
+                \item \textbf{Runtime:} Python 3.10
+            \end{itemize}
+        \end{block}
+
+        \column{0.45\textwidth}
+        \begin{itemize}
+            \item Sufficient for custom CNN backbone.
+            \item Supports \HL{mixed-precision training}.
+            \item Batch size limited to 4 by VRAM constraints.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Datasets}
+
+% --- Slide 6: Source Domains (CASIA & MSU) ---
+\begin{frame}{Example config: Datasets - Source Training Domains}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{CASIA-FASD}
+            \begin{itemize}
+                \item \textbf{Subjects:} 12
+                \item \textbf{Attacks:} 
+                    \begin{itemize}
+                        \item Low/High quality print
+                        \item Video replay
+                    \end{itemize}
+                \item \pos{Role:} Meta-train source
+            \end{itemize}
+        \end{block}
+
+        \column{0.48\textwidth}
+        \begin{block}{MSU-MFSD}
+            \begin{itemize}
+                \item \textbf{Subjects:} 35
+                \item \textbf{Attacks:}
+                    \begin{itemize}
+                        \item Printed photo
+                        \item Mobile phone replay
+                    \end{itemize}
+                \item \pos{Role:} Meta-train + Val
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% --- Slide 7: Unseen Target Domain (NUAA) ---
+\begin{frame}{Example config: Datasets - Unseen Target Domain}
+    \begin{block}{NUAA Database}
+        \begin{itemize}
+            \item Frontal-face photograph spoofing database.
+            \item \con{Evaluation Role:} Exclusively used as the \textbf{Unseen Target Domain} to test generalization.
+        \end{itemize}
+    \end{block}
+
+    \vfill
+    \begin{itemize}
+        \item \textbf{Split Protocol:} 
+            \texttt{[CASIA + MSU]} $\rightarrow$ \texttt{[NUAA]}
+        \item Shuffled domains each epoch (e.g CASIA as meta-train domain, MSU as meta-test domain or otherway) to simulate learning out-of-distribution.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 8: Supervision & Depth maps ---
+\begin{frame}{Depth Supervision Protocol}
+    \textbf{Leveraging Geometric Cues for Spoof Detection}
+    
+    \begin{center}
+    \begin{tabular}{@{}ll@{}}
+        \toprule
+        \textbf{Sample Type} & \textbf{Depth Map Strategy} \\ \midrule
+        \pos{Live Faces} & \pos{PRNet-generated} geometry ($32 \times 32$) \\
+        \con{Spoof Attacks} & \con{Zero-depth} maps (assumes plane surface) \\ \bottomrule
+    \end{tabular}
+    \end{center}
+
+    \vfill
+    \begin{itemize}
+        \item \textbf{Pre-trained model:} PRNet preserves facial geometry for real faces.
+        \item \textbf{Rationale:} Spoof attacks (print, video) lack 3D depth, making zero-depth a strong discriminative signal.
+    \end{itemize}
+\end{frame}
+
+\subsection{Experimental setup}
+
+% --- Slide 9: Hyperparameters (Table) ---
+\begin{frame}{Experimental Setup: Hyperparameters}
+    \vspace{4pt}
+    \begin{center}
+    \small
+    \begin{tabular}{@{}lll@{}}
+        \toprule
+        \textbf{Category} & \textbf{Parameter} & \textbf{Value} \\ \midrule
+        \textbf{Optimizer} & Algorithm & Adam \\
+         & Learning Rate & $1 \times 10^{-4}$ \\
+         & Weight Decay & $1 \times 10^{-5}$ \\ \midrule
+        \textbf{Scheduler} & StepLR & Step 20, $\gamma=0.5$ \\ \midrule
+        \textbf{Training} & Effective Batch & \pos{32} (4 $\times$ 8 accumulation) \\
+         & Meta Batch / Step Size & 1 / $1 \times 10^{-4}$ \\ \bottomrule
+    \end{tabular}
+    \end{center}
+    \vfill
+    \begin{itemize}
+        \item \textbf{Adam Optimizer:} Use to update weights in outer meta-learning loop.
+        \item \textbf{StepLR Scheduler:} Moderate decay ($\gamma=0.5$), make learning slower and more stable in last epochs.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 10: Training Dynamics ---
+\begin{frame}{Training Dynamics: Gradient Accumulation}
+    \begin{exampleblock}{Hardware Constraint Mitigation}
+        Effective Batch Size = 32 achieved via \textbf{Gradient Accumulation}.
+    \end{exampleblock}
+
+    \begin{itemize}
+        \item \textbf{Problem:} T4 GPU VRAM limits per-step batch size to \textbf{4}.
+        \item \textbf{Solution:} Accumulate gradients over \textbf{8 steps} before updating weights.
+        \item \pos{Benefit:} Preserves regularization behavior of large-batch training without exceeding memory limits.
+    \end{itemize}
+
+    \vfill
+    \begin{alertblock}{Meta-learning Separation}
+        Inner-loop (AFNM module - soft attention weights) updated with \textbf{meta-step size} ($10^{-4}$), separate from outer-loop base model update.
+    \end{alertblock}
+\end{frame}
+
+% --- Slide 11: Loss Weight Rationale ---
+\begin{frame}{Hyperparameters: Loss weights rationale}
+    \begin{columns}[T]
+        \column{0.4\textwidth}
+        \textbf{Loss funcction}
+        \vspace{4pt}
+        \begin{itemize}
+            \item \textbf{Depth Regression (0.1):} Auxiliary regularization.
+            \item \textbf{DCC Losses (0.001):} 
+                \begin{itemize}
+                    \item \con{IDC:} Inter-Domain Compatible
+                    \item \con{ICS:} Inter-Class Separable
+                \end{itemize}
+            \item \textbf{Note:} These act as \HL{regularization coefficients}.
+        \end{itemize}
+        \vspace{4pt}
+        \[ \mathcal{L} = \mathcal{L}_{cls} + 0.1 \mathcal{L}_{dep} + 0.001 (\mathcal{L}_{IDC} + \mathcal{L}_{ICS}) \]
+
+        \column{0.6\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{img/loss_curves.png}
+            \caption{ANRL Training loss curves}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+% --- Slide 12: ANRL Framework Overview ---
+\begin{frame}{ANRL Framework Architecture}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.85\textwidth]{img/framework.png}
+        \caption{Overall ANRL Framework (Fig 2)}
+    \end{figure}
+    \vfill
+    \begin{itemize}
+        \item \textbf{CNN Backbone:} Located at the center as the shared \HL{Feature Extractor}.
+        \item \textbf{Dual Pathways:} Integrates AFNM for both meta-train and meta-test episodes.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 13: Feature Extractor Specification ---
+\begin{frame}{Technical Detail: Custom CNN Backbone}
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+    \begin{tabular}{@{}llcc@{}}
+        \toprule
+        \textbf{Stage} & \textbf{Layer} & \textbf{Channels/Stride} & \textbf{Output Size} \\ \midrule
+        Input & Image & 6 (RGB+HSV) & 256 \\ \midrule
+        Block 1 & conv1-1 to conv1-4 & 64--196 / 1 & 256 \\
+        & pool1-1 & - / 2 & 128 \\ \midrule
+        Block 2 & conv1-5 to conv1-7 & 128--196 / 1 & 128 \\
+        & pool1-2 & - / 2 & 64 \\ \midrule
+        Block 3 & conv1-8 to conv1-10 & 128--196 / 1 & 64 \\
+        & pool1-3 & - / 2 & 32 \\ \bottomrule
+    \end{tabular}
+    }
+    \vfill
+    \begin{itemize}
+        \item \textbf{Architecture:} 10-layer CNN backbone optimized for Colab T4 memory.
+        \item \textbf{Note:} Connects directly to the \HL{Meta-Learner} and \HL{Depth Estimator} branches.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 14: Evaluation Protocol & Metrics ---
+\begin{frame}{Evaluation Protocol \& Performance Metrics}
+    \begin{block}{Primary Metrics}
+        \begin{itemize}
+            \item \textbf{AUC (Area Under Curve):} Evaluates the model's ability to rank real vs. spoof samples correctly across all thresholds.
+            \item \textbf{HTER (Half Total Error Rate):} The average of False Rejection Rate (FRR) and False Acceptance Rate (FAR).
+        \end{itemize}
+    \end{block}
+
+    \vfill
+    \begin{itemize}
+        \item \textbf{Goal:} Achieving \pos{Higher AUC} and \pos{Lower HTER} translates to better cross-domain generalization.
+        \item \textbf{Note:} \HL{t-SNE} analysis is used to visualize feature separation between classes and domains.
+    \end{itemize}
+\end{frame}
+
+
