@@ -1,0 +1,42 @@
+% 5. Personal technical insights and extensibility
+\section{Personal insights: extensibility}
+
+\begin{frame}[fragile]{Future extensibility}
+    \textbf{Extension 1: Simulating Spoofing Clues (Augmentation) \cite{he2024joint}.} \\
+    To overcome reliance on diverse source domains, ANRL can be extended with Joint Physical-Digital augmentation. During Meta-Train, live faces are augmented into simulated attacks ($X_{sim}$) using Simulated Physical (e.g., color distortion, $\theta_{SPSC}$) and Digital (e.g., Gaussian blur, $\theta_{SDSC}$) Spoofing Clues.
+    \begin{equation}
+        X_{sim} = Aug(X_{real}; \theta_{SPSC}, \theta_{SDSC})
+    \end{equation}
+    
+    \begin{figure}[ht]
+    \centering
+    \scalebox{0.55}{
+    \begin{tikzpicture}[
+        >=latex,
+        node distance=1.0cm and 1.2cm,
+        box/.style={draw, rectangle, rounded corners, thick, align=center, fill=blue!10, minimum height=1cm, minimum width=2.5cm},
+        augbox/.style={draw, rectangle, rounded corners, thick, align=center, fill=yellow!20, minimum height=1cm, minimum width=2.5cm},
+        arrow/.style={->, thick}
+    ]
+    % Nodes
+    \node[box, fill=green!10] (input) {Genuine Face \\ $X_{real}$};
+    \node[augbox, right=of input, yshift=1cm] (spsc) {Physical Clues (SPSC) \\ \small Moir\'e, Color Dist.};
+    \node[augbox, right=of input, yshift=-1cm] (sdsc) {Digital Clues (SDSC) \\ \small Blur, Artifacts};
+    \node[box, fill=purple!10, right=of spsc, yshift=-1cm] (xsim) {Simulated Attack \\ $X_{sim}$};
+    \node[box, right=of xsim] (afnm) {Feature Extractor \\ \& AFNM};
+
+    % Arrows
+    \draw[arrow] (input.east) -- ++(0.3,0) |- (spsc.west);
+    \draw[arrow] (input.east) -- ++(0.3,0) |- (sdsc.west);
+    \draw[arrow] (spsc.east) -| ++(0.3,-1) -- (xsim.west);
+    \draw[arrow] (sdsc.east) -| ++(0.3, 1) -- (xsim.west);
+    \draw[arrow] (xsim.east) -- (afnm.west);
+    \end{tikzpicture}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Future extensibility (cont.)}
+    \textbf{Extension 2: Temporal-Spectral ANRL (TS-ANRL).} \\
+    While ANRL excels in 2D spatial generalization, practical FAS heavily relies on temporal cues (e.g., eye blinking). Extending AFNM with 3D convolutions allows temporal-IN to filter dynamic lighting fluctuations, while temporal-BN preserves chronological inconsistencies inherent to video replay attacks.
+\end{frame}

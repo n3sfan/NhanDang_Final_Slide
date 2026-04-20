@@ -1,0 +1,98 @@
+% 4. Technical evaluation: strengths, limitations, and applicability
+\section{Technical evaluation}
+
+\begin{frame}{Technical evaluation: Strengths}
+    \textbf{Strengths}:
+    \begin{itemize}
+        \item \textbf{Study effects of normalization}: Previous domain generalization techniques rely on static hybrid normalizations.
+        \item \textbf{Asymmetric class constraints for spoof detection} Compared to clustering all instances of a specific class tightly around a centroid, the ANRL framework correctly assumes that while live faces share a common physiological distribution.
+        \item \textbf{Meta-learning optimization strategy}: By dividing the available source domains, AFNM parameters ($\theta_F$) is forced to generalize.
+    \end{itemize}
+\end{frame}
+\begin{frame}[fragile, shrink=2]{Technical evaluation: Limitations}
+    \begin{columns}[T]
+        \begin{column}{0.6\textwidth}
+            \small
+            \textbf{Limitations}:
+            \begin{itemize}
+                \item \textbf{Dataset dependency}: Episodic meta-learning requires massive and highly diverse source datasets.
+                \item \textbf{Spatial-only modality}: Ignores temporal cues, vulnerable to video replays.
+                \item \textbf{Auxiliary supervision}: The method heavily relies on an auxiliary Depth Estimator.
+                \item \textbf{Compactness assumption}: Genuine faces with extreme structural variance (e.g., severe poses) can fall out of $D_{rr}$, causing false rejections.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \vspace{-1.5em}
+            \begin{figure}
+                \scalebox{0.55}{
+                \begin{tikzpicture}[
+                    scale=0.9, transform shape,
+                    real/.style={circle, fill=green!20, draw=green!60!black, minimum size=0.6cm, inner sep=0pt},
+                    fake1/.style={regular polygon, regular polygon sides=3, fill=red!20, draw=red!60!black, minimum size=0.7cm, inner sep=0pt},
+                    fake2/.style={rectangle, fill=blue!20, draw=blue!60!black, minimum size=0.6cm, inner sep=0pt},
+                    domainbox/.style={ellipse, draw=gray, dashed, thick, minimum width=3cm, minimum height=2cm},
+                    arrow/.style={-stealth, thick, color=gray}
+                ]
+                    % Domain 1
+                    \node[domainbox, rotate=20] at (-2.5, 2) (d1) {};
+                    \node[font=\footnotesize, color=gray] at (-3.5, 3.2) {Domain 1};
+                    
+                    % Domain 2
+                    \node[domainbox, rotate=-15] at (2.5, 2) (d2) {};
+                    \node[font=\footnotesize, color=gray] at (3.5, 3.2) {Domain 2};
+
+                    % Real cluster (center)
+                    \draw[fill=green!5, draw=green!40, dashed, thick, rounded corners=1cm] (-1.5, -1) rectangle (1.5, 1);
+                    \node[font=\footnotesize, color=green!60!black, align=center] at (0, 1.3) {Compact Real\\Distribution};
+                    
+                    \node[real] (r1) at (-0.5, 0.2) {};
+                    \node[real] (r2) at (0.3, 0.5) {};
+                    \node[real] (r3) at (0.6, -0.3) {};
+                    \node[real] (r4) at (-0.2, -0.4) {};
+                    
+                    \draw[arrow, shorten >=2pt] (-1, 0.8) -- (r1);
+                    \draw[arrow, shorten >=2pt] (1.2, 0) -- (r3);
+                    \node[font=\footnotesize] at (-1.3, 0.9) {$D_{rr}$};
+
+                    % Fake samples (scattered)
+                    \node[fake1] (f1) at (-3, 2.2) {};
+                    \node[fake2] (f2) at (-2, 1.5) {};
+                    \node[fake1] (f5) at (-2.8, 1.3) {};
+                    \node[fake2] (f6) at (-1.8, 2.3) {};
+                    
+                    \node[fake1] (f3) at (3, 2.2) {};
+                    \node[fake2] (f4) at (1.8, 1.6) {};
+                    \node[fake1] (f7) at (2.5, 2.6) {};
+                    
+                    \draw[arrow, dashed, -stealth, red] (1.5, 1) -- (f3);
+                    \node[font=\footnotesize, red] at (2.4, 1.3) {$D_{rf}$};
+
+                    % Failure Case
+                    \node[real, fill=orange!40, draw=red!80, thick] (fail) at (-2.5, -1.6) {};
+                    \draw[-stealth, red, thick] (fail) -- (-1.2, -0.6);
+                    \node[font=\footnotesize, align=center, text width=3.8cm, anchor=north] at (-2.5, -2.0) {Extreme variance\\real face forms (poses, etc) outlier\\$\rightarrow$ False Rejection};
+
+                    % Legend
+                    \matrix [draw, fill=white, below right, column sep=0.1cm, row sep=0.1cm, nodes={anchor=center}, ampersand replacement=\&] at (2, -2.5) {
+                      \node[real] {}; \& \node[font=\footnotesize, anchor=west] {Real}; \\
+                      \node[fake1] {}; \& \node[font=\footnotesize, anchor=west] {Print Fake}; \\
+                      \node[fake2] {}; \& \node[font=\footnotesize, anchor=west] {Replay Fake}; \\
+                    };
+
+        \end{tikzpicture}
+        }
+    \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Technical evaluation: Applicability}
+- Easy to implement: PyTorch, architecture: RFM \cite{shao2020rfm}.
+
+- Security-critical deployments: environments where lighting and sensors varied, such as mobile banking authentication, etc.
+\end{frame}
+
+
+% \begin{frame}{Experiment}
+% \includegraphics[width=\linewidth]{img/ROC.png}
+% \end{frame}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.20)  19 APR 2026 21:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.20)  20 APR 2026 08:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -983,69 +983,111 @@ Overfull \vbox (8.2238pt too high) detected at line 64
 
 ] (slide.toc) [2
 
-] (section/01.tex [3
+] (section/03_methodology.tex [3
 
-] [4
+]
+<img/illustrate.png, id=167, 708.7278pt x 482.7636pt>
+File: img/illustrate.png Graphic file (type png)
+<use img/illustrate.png>
+Package pdftex.def Info: img/illustrate.png  used on input line 7.
+(pdftex.def)             Requested size: 307.28987pt x 209.31538pt.
+ [4
+
+ <./img/illustrate.png>]
+<img/datasets.png, id=197, 500.5902pt x 70.3428pt>
+File: img/datasets.png Graphic file (type png)
+<use img/datasets.png>
+Package pdftex.def Info: img/datasets.png  used on input line 23.
+(pdftex.def)             Requested size: 276.559pt x 38.8636pt.
+
+
+LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <10> not available
+(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 23.
+
+[5
+
+ <./img/datasets.png>]
+<img/framework.png, id=228, 757.8714pt x 320.8788pt>
+File: img/framework.png Graphic file (type png)
+<use img/framework.png>
+Package pdftex.def Info: img/framework.png  used on input line 31.
+(pdftex.def)             Requested size: 307.29472pt x 130.10698pt.
+ [6
+
+ <./img/framework.png>]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 93.
+ (/home/nesfan/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 93.
+ (/home/nesfan/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 93.
+ (/home/nesfan/.miktex/texmfs/install/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
+)
+Overfull \hbox (8.40544pt too wide) in paragraph at lines 93--93
+ [] 
+ []
+
+[7
+
+]
+
+LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <9> not available
+(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 121.
+
+[8
+
+]
+<img/depthmap.png, id=326, 463.7325pt x 443.6575pt>
+File: img/depthmap.png Graphic file (type png)
+<use img/depthmap.png>
+Package pdftex.def Info: img/depthmap.png  used on input line 160.
+(pdftex.def)             Requested size: 110.13318pt x 105.36298pt.
+
+
+LaTeX Warning: Citation `feng2018joint' on page 9 undefined on input line 160.
+
+
+LaTeX Warning: Citation `feng2018joint' on page 9 undefined on input line 160.
+
+[9
+
+ <./img/depthmap.png>] [10
+
+]) (section/04_evaluation.tex [11
+
+] [12
+
+]
+\openout4 = `slide.vrb'.
+
+ (slide.vrb
+Overfull \hbox (15.1761pt too wide) in paragraph at lines 72--73
+ [] 
+ []
+
+) [13
+
+]
+
+LaTeX Warning: Citation `shao2020rfm' on page 14 undefined on input line 93.
+
+[14
+
+]) (section/01.tex [15
+
+] [16
 
 ]
 LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 43.
  (/home/nesfan/.miktex/texmfs/install/tex/latex/vntex/t5cmtt.fd
 File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [5
+) [17
 
-] [6
-
-] [7
-
-] [8
-
-] [9
-
-]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 156.
- (/home/nesfan/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 156.
- (/home/nesfan/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 156.
- (/home/nesfan/.miktex/texmfs/install/tex/latex/sansmathaccent/ot1mathkerncmss.fd
-File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
-) [10
-
-] [11
-
-] [12
-
-] [13
-
-]
-Overfull \hbox (55.09598pt too wide) detected at line 246
-\OMS/cmsy/m/n/10.95 L \OT1/cmss/m/n/10.95 = \OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \T5/cmss/m/n/10.95 0\OML/cmm/m/it/10.95 :\T5/cmss/m/n/10.95 1\OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \T5/cmss/m/n/10.95 0\OML/cmm/m/it/10.95 :\T5/cmss/m/n/10.95 001\OT1/cmss/m/n/10.95 (\OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \OMS/cmsy/m/n/10.95 L[]\OT1/cmss/m/n/10.95 )
- []
-
-<img/loss_curves.png, id=436, 1806.75pt x 1355.0625pt>
-File: img/loss_curves.png Graphic file (type png)
-<use img/loss_curves.png>
-Package pdftex.def Info: img/loss_curves.png  used on input line 246.
-(pdftex.def)             Requested size: 184.3758pt x 138.26416pt.
-[14
-
- <./img/loss_curves.png (PNG copy)>]
-<img/framework.png, id=465, 757.8714pt x 320.8788pt>
-File: img/framework.png Graphic file (type png)
-<use img/framework.png>
-Package pdftex.def Info: img/framework.png  used on input line 260.
-(pdftex.def)             Requested size: 261.19826pt x 110.59068pt.
- [15
-
- <./img/framework.png>] [16
-
-] [17
-
-]) (section/02.tex [18
+] [18
 
 ] [19
 
@@ -1061,9 +1103,121 @@ Package pdftex.def Info: img/framework.png  used on input line 260.
 
 ] [25
 
-] [26
+]
+Overfull \hbox (55.09598pt too wide) detected at line 246
+\OMS/cmsy/m/n/10.95 L \OT1/cmss/m/n/10.95 = \OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \T5/cmss/m/n/10.95 0\OML/cmm/m/it/10.95 :\T5/cmss/m/n/10.95 1\OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \T5/cmss/m/n/10.95 0\OML/cmm/m/it/10.95 :\T5/cmss/m/n/10.95 001\OT1/cmss/m/n/10.95 (\OMS/cmsy/m/n/10.95 L[] \OT1/cmss/m/n/10.95 + \OMS/cmsy/m/n/10.95 L[]\OT1/cmss/m/n/10.95 )
+ []
 
-] [27
+<img/loss_curves.png, id=828, 1806.75pt x 1355.0625pt>
+File: img/loss_curves.png Graphic file (type png)
+<use img/loss_curves.png>
+Package pdftex.def Info: img/loss_curves.png  used on input line 246.
+(pdftex.def)             Requested size: 184.3758pt x 138.26416pt.
+[26
+
+ <./img/loss_curves.png (PNG copy)>]
+File: img/framework.png Graphic file (type png)
+<use img/framework.png>
+Package pdftex.def Info: img/framework.png  used on input line 260.
+(pdftex.def)             Requested size: 261.19826pt x 110.59068pt.
+ [27
+
+] [28
+
+] [29
+
+]) (section/02.tex [30
+
+] [31
+
+] [32
+
+] [33
+
+] [34
+
+] [35
+
+] [36
+
+] [37
+
+] [38
+
+]) (section/06_experiments.tex [39
+
+] [40
+
+] [41
+
+] [42
+
+] [43
+
+] [44
+
+]
+Overfull \hbox (22.53282pt too wide) in paragraph at lines 97--97
+ [] 
+ []
+
+[45
+
+]
+<img/casia_example.png, id=1412, 924.95563pt x 351.3125pt>
+File: img/casia_example.png Graphic file (type png)
+<use img/casia_example.png>
+Package pdftex.def Info: img/casia_example.png  used on input line 117.
+(pdftex.def)             Requested size: 122.90181pt x 46.68001pt.
+<img/msu_example.png, id=1413, 1099.60812pt x 209.78375pt>
+File: img/msu_example.png Graphic file (type png)
+<use img/msu_example.png>
+Package pdftex.def Info: img/msu_example.png  used on input line 117.
+(pdftex.def)             Requested size: 184.36377pt x 35.173pt.
+<img/nuaa_example.png, id=1414, 995.72pt x 494.34688pt>
+File: img/nuaa_example.png Graphic file (type png)
+<use img/nuaa_example.png>
+Package pdftex.def Info: img/nuaa_example.png  used on input line 117.
+(pdftex.def)             Requested size: 143.27417pt x 71.13158pt.
+ [46
+
+ <./img/casia_example.png> <./img/msu_example.png> <./img/nuaa_example.png>] [47
+
+] [48
+
+]
+<img/mtcnn.png, id=1499, 290.58563pt x 479.29062pt>
+File: img/mtcnn.png Graphic file (type png)
+<use img/mtcnn.png>
+Package pdftex.def Info: img/mtcnn.png  used on input line 159.
+(pdftex.def)             Requested size: 113.69574pt x 187.52959pt.
+ [49
+
+ <./img/mtcnn.png>] [50
+
+] [51
+
+] [52
+
+] [53
+
+] [54
+
+] [55
+
+] [56
+
+] [57
+
+] [58
+
+] [59
+
+] [60
+
+] [61
+
+] [62
 
 ])
 \tf@nav=\write6
@@ -1080,21 +1234,25 @@ Package pdftex.def Info: img/framework.png  used on input line 260.
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 56516B9D348E433AAE795DDB1F0F312D;987.
+(rerunfilecheck)             Checksum: D9C501C0924E56CBCFFA70EBC918DC0B;1364.
  ) 
 Here is how much of TeX's memory you used:
- 27496 strings out of 469804
- 546840 string characters out of 5470269
- 917735 words of memory out of 5000000
- 55509 multiletter control sequences out of 15000+600000
- 651533 words of font info for 97 fonts, out of 8000000 for 9000
+ 28300 strings out of 469804
+ 560307 string characters out of 5470269
+ 961709 words of memory out of 5000000
+ 56219 multiletter control sequences out of 15000+600000
+ 656429 words of font info for 107 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 128i,15n,123p,458b,1077s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmss10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmssi10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmssi8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss12.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnssbx10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vntt10.pfb>
-Output written on slide.pdf (27 pages, 1074550 bytes).
+ 128i,20n,123p,458b,1469s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi6.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmss10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmss8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmss9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmssi10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmssi8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmssi9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy6.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss12.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss8.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnss9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnssbx10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnssi10.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vnssi9.pfb></home/nesfan/.miktex/texmfs/install/fonts/type1/vntex/vnr/vntt10.pfb>
+Output written on slide.pdf (62 pages, 8880678 bytes).
 PDF statistics:
- 913 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 249 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2022 PDF objects out of 2073 (max. 8388607)
+ 135 named destinations out of 1000 (max. 500000)
+ 410 words of extra memory for PDF output out of 10000 (max. 10000000)
 
